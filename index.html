@@ -1,152 +1,178 @@
 <!doctype html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#2E2018">
-<title>MapaJur</title>
-<meta name="description" content="Mapa dos eventos presenciais da área do Direito no Brasil em 2026.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#2E2018">
+  <title>MapaJur</title>
+  <meta name="description" content="Mapa dos eventos presenciais da área do Direito no Brasil em 2026.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-<a class="skip" href="#mapa">Pular para o mapa</a>
+  <a class="skip" href="#mapa">Pular para o mapa</a>
 
-<header class="top">
-  <div class="wrap">
-    <a class="brand" href="#topo" aria-label="MapaJur, início">
-      <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="#D2B98C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4v22M9 27h14M6 9h20M16 6.5l0 0"/><path d="M6 9 2.5 17h7z"/><path d="M26 9l-3.5 8h7z"/><path d="M2.5 17a3.5 2 0 0 0 7 0M22.5 17a3.5 2 0 0 0 7 0"/></g></svg>
-      MapaJur
-    </a>
-    <nav aria-label="Seções">
-      <a href="#calendario">Calendário</a>
-      <a class="suggest" id="suggestTop" href="#" target="_blank" rel="noopener">Sugerir evento ↗</a>
-    </nav>
-  </div>
-</header>
-
-<main id="topo">
-  <section class="wrap intro">
-    <div class="eyebrow">Pauta nacional · eventos presenciais</div>
-    <h1>Eventos jurídicos no Brasil</h1>
-    <p class="lede">Congressos, conferências da OAB, simpósios de institutos e feiras do mercado jurídico em 2026, organizados por estado e por data. Clique em um estado para ver só a pauta dele.</p>
-  </section>
-
-  <div class="wrap">
-    <div class="filters" role="group" aria-label="Filtros">
-      <div class="seg" id="typeSeg" role="group" aria-label="Tipo de evento"></div>
-      <label class="field" for="areaSel">Área
-        <select id="areaSel"></select>
-      </label>
-      <label class="field grow" for="q">Buscar
-        <input id="q" type="search" placeholder="nome, cidade, instituição" autocomplete="off">
-      </label>
-      <span class="chip-state" id="stateChip"><span id="stateChipTxt"></span><button type="button" id="stateClear" aria-label="Limpar filtro de estado">×</button></span>
+  <header class="top">
+    <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-52FC5VKX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {dataLayer.push(arguments);}
+      gtag('js', new Date());
+    </script>
+    <div class="wrap">
+      <a class="brand" href="#topo" aria-label="MapaJur, início">
+        <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true">
+          <g fill="none" stroke="#D2B98C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 4v22M9 27h14M6 9h20M16 6.5l0 0" />
+            <path d="M6 9 2.5 17h7z" />
+            <path d="M26 9l-3.5 8h7z" />
+            <path d="M2.5 17a3.5 2 0 0 0 7 0M22.5 17a3.5 2 0 0 0 7 0" />
+          </g>
+        </svg>
+        MapaJur
+      </a>
+      <nav aria-label="Seções">
+        <a href="#calendario">Calendário</a>
+        <a class="suggest" id="suggestTop" href="#" target="_blank" rel="noopener">Sugerir evento ↗</a>
+      </nav>
     </div>
-  </div>
+  </header>
 
-  <section class="wrap board">
-    <div class="panel mapbox" id="mapa">
-      <div class="panel-head">
-        <h2>Onde acontece</h2>
-        <span class="hint">Toque em um estado para filtrar</span>
-      </div>
-      <svg id="map" viewBox="-5 -5 1160 1095" role="img" aria-label="Mapa do Brasil com o número de eventos jurídicos por estado"></svg>
-      <div class="legend">
-        <span>Eventos no estado</span>
-        <span class="sw"><i style="background:var(--map-0)"></i>0</span>
-        <span class="sw"><i style="background:var(--map-1)"></i>1</span>
-        <span class="sw"><i style="background:var(--map-2)"></i>2 ou mais</span>
-        <span class="sep" aria-hidden="true"></span>
-        <span class="sw"><span class="dot" style="background:var(--t-inst)"></span>Institucional</span>
-        <span class="sw"><span class="dot" style="background:var(--t-acad)"></span>Acadêmico</span>
-        <span class="sw"><span class="dot" style="background:var(--t-merc)"></span>Mercado</span>
+  <main id="topo">
+    <section class="wrap intro">
+      <div class="eyebrow">Pauta nacional · eventos presenciais</div>
+      <h1>Eventos jurídicos no Brasil</h1>
+      <p class="lede">Congressos, conferências da OAB, simpósios de institutos e feiras do mercado jurídico em 2026,
+        organizados por estado e por data. Clique em um estado para ver só a pauta dele.</p>
+    </section>
+
+    <div class="wrap">
+      <div class="filters" role="group" aria-label="Filtros">
+        <div class="seg" id="typeSeg" role="group" aria-label="Tipo de evento"></div>
+        <label class="field" for="areaSel">Área
+          <select id="areaSel"></select>
+        </label>
+        <label class="field grow" for="q">Buscar
+          <input id="q" type="search" placeholder="nome, cidade, instituição" autocomplete="off">
+        </label>
+        <span class="chip-state" id="stateChip"><span id="stateChipTxt"></span><button type="button" id="stateClear"
+            aria-label="Limpar filtro de estado">×</button></span>
       </div>
     </div>
 
-    <div class="panel agenda" id="pauta">
-      <div class="panel-head">
+    <section class="wrap board">
+      <div class="panel mapbox" id="mapa">
+        <div class="panel-head">
+          <h2>Onde acontece</h2>
+          <span class="hint">Toque em um estado para filtrar</span>
+        </div>
+        <svg id="map" viewBox="-5 -5 1160 1095" role="img"
+          aria-label="Mapa do Brasil com o número de eventos jurídicos por estado"></svg>
+        <div class="legend">
+          <span>Eventos no estado</span>
+          <span class="sw"><i style="background:var(--map-0)"></i>0</span>
+          <span class="sw"><i style="background:var(--map-1)"></i>1</span>
+          <span class="sw"><i style="background:var(--map-2)"></i>2 ou mais</span>
+          <span class="sep" aria-hidden="true"></span>
+          <span class="sw"><span class="dot" style="background:var(--t-inst)"></span>Institucional</span>
+          <span class="sw"><span class="dot" style="background:var(--t-acad)"></span>Acadêmico</span>
+          <span class="sw"><span class="dot" style="background:var(--t-merc)"></span>Mercado</span>
+        </div>
+      </div>
+
+      <div class="panel agenda" id="pauta">
+        <div class="panel-head">
+          <div>
+            <div class="eyebrow">Pauta 2026</div>
+            <h2 id="agendaTitle">Todo o Brasil</h2>
+          </div>
+          <div class="stats" aria-live="polite">
+            <div class="stat"><b id="sTotal">–</b><span>Eventos em 2026</span></div>
+            <div class="stat"><b id="sUfs">–</b><span>UFs no mapa</span></div>
+            <div class="stat"><b id="sNext">–</b><span>Ainda por vir</span></div>
+          </div>
+        </div>
+        <div class="tabs" role="tablist" aria-label="Período">
+          <button role="tab" id="tabNext" aria-selected="true" aria-controls="list">Próximos <span class="n"
+              id="nNext">0</span></button>
+          <button role="tab" id="tabPast" aria-selected="false" aria-controls="list">Já aconteceram <span class="n"
+              id="nPast">0</span></button>
+        </div>
+        <ul class="list" id="list" role="tabpanel"></ul>
+      </div>
+    </section>
+
+    <section class="wrap cal-sec" id="calendario">
+      <div class="cal-head">
         <div>
-          <div class="eyebrow">Pauta 2026</div>
-          <h2 id="agendaTitle">Todo o Brasil</h2>
+          <div class="eyebrow">Calendário</div>
+          <h2>Calendário forense</h2>
         </div>
-        <div class="stats" aria-live="polite">
-          <div class="stat"><b id="sTotal">–</b><span>Eventos em 2026</span></div>
-          <div class="stat"><b id="sUfs">–</b><span>UFs no mapa</span></div>
-          <div class="stat"><b id="sNext">–</b><span>Ainda por vir</span></div>
+        <div class="cal-tools">
+          <div class="monthbar">
+            <button class="btn icon" id="prevM" aria-label="Mês anterior">‹</button>
+            <strong id="monthLbl">—</strong>
+            <button class="btn icon" id="nextM" aria-label="Próximo mês">›</button>
+            <button class="btn" id="todayBtn">Hoje</button>
+          </div>
+          <div class="seg" role="group" aria-label="Exibir">
+            <button type="button" id="calAll" aria-pressed="true">Todos</button>
+            <button type="button" id="calMine" aria-pressed="false">Minha agenda <span id="nMine">0</span></button>
+          </div>
+          <button class="btn" id="icsAll">Copiar .ics da minha agenda</button>
         </div>
       </div>
-      <div class="tabs" role="tablist" aria-label="Período">
-        <button role="tab" id="tabNext" aria-selected="true" aria-controls="list">Próximos <span class="n" id="nNext">0</span></button>
-        <button role="tab" id="tabPast" aria-selected="false" aria-controls="list">Já aconteceram <span class="n" id="nPast">0</span></button>
+      <div class="calgrid" id="cal" aria-label="Calendário do mês"></div>
+      <div class="daylist" id="daylist" hidden>
+        <h3 id="dayTitle"></h3>
+        <ul class="list" id="dayItems"></ul>
       </div>
-      <ul class="list" id="list" role="tabpanel"></ul>
-    </div>
-  </section>
+      <p class="note">Toque num evento para ver os detalhes, salvar na sua agenda ou levar para o Google Agenda.
+        Feriados nacionais aparecem em cinza; datas próprias do mundo jurídico, como o Dia da Advocacia (11/08) e o Dia
+        da Justiça (08/12), aparecem em latão. Os filtros de tipo, área, busca e estado valem para o mapa, a pauta e o
+        calendário ao mesmo tempo.</p>
+    </section>
+  </main>
 
-  <section class="wrap cal-sec" id="calendario">
-    <div class="cal-head">
-      <div>
-        <div class="eyebrow">Calendário</div>
-        <h2>Calendário forense</h2>
+  <footer>
+    <div class="wrap">
+      <span> <a id="suggestFoot" href="#" target="_blank" rel="noopener"></a></span>
+      <span>© 2026 Site criado por <a href="https://ello-consultoria.vercel.app/" target="_blank">ello Consultoria
+          Educacional ↗</a></span>
+    </div>
+  </footer>
+
+  <dialog id="dlg" aria-labelledby="dTitle">
+    <div class="dlg-top">
+      <div class="eyebrow" id="dEyebrow"></div>
+      <h2 id="dTitle"></h2>
+      <button class="x" id="dClose" aria-label="Fechar">×</button>
+    </div>
+    <div class="dlg-body">
+      <dl class="facts" id="dFacts"></dl>
+      <div class="actions">
+        <button class="btn primary" id="dSave"></button>
+        <a class="btn" id="dGcal" target="_blank" rel="noopener">Google Agenda ↗</a>
+        <button class="btn" id="dIcs">Copiar .ics</button>
+        <button class="btn" id="dMap">Ver no mapa</button>
+        <a class="btn" id="dSrc" target="_blank" rel="noopener">Página do evento ↗</a>
       </div>
-      <div class="cal-tools">
-        <div class="monthbar">
-          <button class="btn icon" id="prevM" aria-label="Mês anterior">‹</button>
-          <strong id="monthLbl">—</strong>
-          <button class="btn icon" id="nextM" aria-label="Próximo mês">›</button>
-          <button class="btn" id="todayBtn">Hoje</button>
-        </div>
-        <div class="seg" role="group" aria-label="Exibir">
-          <button type="button" id="calAll" aria-pressed="true">Todos</button>
-          <button type="button" id="calMine" aria-pressed="false">Minha agenda <span id="nMine">0</span></button>
-        </div>
-        <button class="btn" id="icsAll">Copiar .ics da minha agenda</button>
-      </div>
+      <textarea class="ics" id="icsBox" hidden readonly aria-label="Conteúdo do arquivo .ics"></textarea>
     </div>
-    <div class="calgrid" id="cal" aria-label="Calendário do mês"></div>
-    <div class="daylist" id="daylist" hidden>
-      <h3 id="dayTitle"></h3>
-      <ul class="list" id="dayItems"></ul>
-    </div>
-    <p class="note">Toque num evento para ver os detalhes, salvar na sua agenda ou levar para o Google Agenda. Feriados nacionais aparecem em cinza; datas próprias do mundo jurídico, como o Dia da Advocacia (11/08) e o Dia da Justiça (08/12), aparecem em latão. Os filtros de tipo, área, busca e estado valem para o mapa, a pauta e o calendário ao mesmo tempo.</p>
-  </section>
-</main>
+  </dialog>
 
-<footer>
-  <div class="wrap">
-    <span> <a id="suggestFoot" href="#" target="_blank" rel="noopener"></a></span>
-    <span>© 2026 Site criado por <a href="https://ello-consultoria.vercel.app/" target="_blank">ello Consultoria Educacional ↗</a></span>
-  </div>
-</footer>
+  <div class="toast" id="toast" role="status"></div>
 
-<dialog id="dlg" aria-labelledby="dTitle">
-  <div class="dlg-top">
-    <div class="eyebrow" id="dEyebrow"></div>
-    <h2 id="dTitle"></h2>
-    <button class="x" id="dClose" aria-label="Fechar">×</button>
-  </div>
-  <div class="dlg-body">
-    <dl class="facts" id="dFacts"></dl>
-    <div class="actions">
-      <button class="btn primary" id="dSave"></button>
-      <a class="btn" id="dGcal" target="_blank" rel="noopener">Google Agenda ↗</a>
-      <button class="btn" id="dIcs">Copiar .ics</button>
-      <button class="btn" id="dMap">Ver no mapa</button>
-      <a class="btn" id="dSrc" target="_blank" rel="noopener">Página do evento ↗</a>
-    </div>
-    <textarea class="ics" id="icsBox" hidden readonly aria-label="Conteúdo do arquivo .ics"></textarea>
-  </div>
-</dialog>
-
-<div class="toast" id="toast" role="status"></div>
-
-<script src="js/config.js"></script>
-<script src="js/geo.js"></script>
-<script src="js/data.js"></script>
-<script src="js/app.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/geo.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
 </body>
+
 </html>

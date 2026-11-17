@@ -4,14 +4,6 @@ Mapa dos eventos presenciais da área do Direito no Brasil em 2026: congressos, 
 
 Site estático (HTML, CSS e JavaScript puros), sem dependências e sem etapa de build.
 
-## Publicar no GitHub Pages
-
-1. Envie esta pasta para um repositório no GitHub.
-2. Em **Settings → Pages**, escolha a branch `main` e a pasta `/ (root)`.
-3. O site fica disponível em `https://seu-usuario.github.io/nome-do-repositorio/`.
-
-Também funciona na Vercel ou na Netlify sem nenhuma configuração.
-
 ## Créditos
 
 Contornos do mapa: Natural Earth (via Highcharts Map Collection).
